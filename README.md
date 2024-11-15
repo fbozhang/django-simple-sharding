@@ -1,1 +1,1 @@
-# easy-django-sharding
+# django-simple-sharding
