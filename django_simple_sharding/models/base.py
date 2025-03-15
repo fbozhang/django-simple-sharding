@@ -344,6 +344,13 @@ class OpenAccessMeta(RestrictedAccessMeta):
             raise AttributeError("can't get attribute 'shard'")
         return ModelBase.__getattribute__(self, item)
 
+    def __subclasscheck__(self, subclass):
+        for base in self.mro():
+            if issubclass(base, ShardingModel) and issubclass(subclass, base):
+                return True
+
+        return super().__subclasscheck__(subclass)
+
 
 class ShardingModel(models.Model, metaclass=RestrictedAccessMeta):
     namespace = {}
