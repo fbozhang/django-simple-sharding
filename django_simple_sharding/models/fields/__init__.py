@@ -5,12 +5,13 @@ from django_simple_sharding.utils.snowflake import address_snowflake_generator
 
 class SnowflakeIDField(models.CharField):
     def __init__(self, *args, snowflake_generator=None, **kwargs):
+        kwargs.setdefault("max_length", 20)
+
         if snowflake_generator is None:
             snowflake_generator = address_snowflake_generator
         self._check_snowflake_generator(snowflake_generator)
         self.snowflake_generator = snowflake_generator
 
-        kwargs.setdefault("max_length", 20)
         super().__init__(*args, **kwargs)
 
     @staticmethod
