@@ -19,7 +19,7 @@ from django.db.models.deletion import CASCADE
 from django.db.models.fields.related import OneToOneField, resolve_relation
 from django.db.models.utils import make_model_tuple
 
-from django_simple_sharding.models.options import ShardingOptions
+from django_simple_sharding.db.models.options import ShardingOptions
 
 logger = logging.getLogger(__name__)
 T = TypeVar("T")
@@ -384,6 +384,7 @@ class ShardingModel(models.Model, metaclass=RestrictedAccessMeta):
             {
                 "abstract": False,
                 "managed": False,
+                "is_shard": True,
                 "db_table": table_name,
             },
         )
